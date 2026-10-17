@@ -1,0 +1,11 @@
+inherit: default.yaml
+out_dir: outputs/quick
+seeds: [0]
+platoon_sizes: [4, 5]
+rl:
+  episodes: 64
+  log_every: 2
+dqn:
+  episodes: 64
+tabular:
+  episodes: 200

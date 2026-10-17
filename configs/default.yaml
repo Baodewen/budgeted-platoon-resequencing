@@ -1,0 +1,86 @@
+out_dir: outputs/default
+device: auto
+seeds: [0, 1, 2, 3, 4]
+platoon_sizes: [4, 5, 6, 7]
+n_regimes: 4
+
+budget:
+  4: [2, 2, 1, 0]
+  5: [5, 3, 2, 0]
+  6: [8, 5, 3, 0]
+  7: [10, 8, 6, 2]
+
+scenario:
+  source: synthetic
+  file: data/traffic.npz
+  n_days: 35
+  seed: 0
+  speed_thresholds: [104.0, 85.0, 55.0]
+  n_test_days: 7
+  episode_steps: 144
+  train_hours: [6.0, 18.0]
+  train_stride: 6
+  test_start_hours: [8, 12, 16]
+
+energy:
+  battery_kwh: 85.0
+  soc_start: 0.8
+  soc_stop: 0.2
+  delta_kwh_per_km: 0.211
+  mass_kg: 29400.0
+  cruise_kmh: 105.0
+  frontal_area: 10.7
+  rho_air: 1.2
+  r0: 0.006
+  length_m: 5.8
+  gap_ratio: 0.2
+  calib_M: 0.437
+  K1: 0.014
+  K2: 0.366
+
+reward:
+  w_mid_soc: 1.0
+  w_mid_dist: 1.0
+  w_final: 1000.0
+
+env:
+  decision_steps: 5
+  max_decisions: 60
+
+rl:
+  hidden: 128
+  sage_layers: 2
+  lr_init: 0.0003
+  lr_min: 0.0001
+  lr_decay: 0.99
+  gamma: 0.98
+  gae_lambda: 0.95
+  clip: 0.2
+  epochs: 10
+  minibatch: 64
+  episodes: 15000
+  episodes_per_update: 8
+  vf_coef: 0.5
+  ent_coef: 0.01
+  grad_clip: 1.0
+  log_every: 50
+  lambda_lr: 0.05
+  cost_limit: 0.0
+  trpo_max_kl: 0.01
+  trpo_damping: 0.1
+  trpo_cg_iters: 10
+
+dqn:
+  hidden: 128
+  lr: 0.001
+  gamma: 0.98
+  buffer: 50000
+  batch: 64
+  target_every: 500
+  eps_end: 0.05
+  eps_decay_frac: 0.6
+  episodes: 15000
+
+tabular:
+  lr: 0.1
+  episodes: 15000
